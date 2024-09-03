@@ -6,6 +6,8 @@ This project converts images to ASCII art, allowing the user to save the output 
 ### Reference Image and ASCII PNG Image:
 <img src="https://github.com/user-attachments/assets/a5f1ce91-9b08-4161-9464-8d7b7d75aad8" alt="imagem" width="300" style="display: inline-block;"/>
 <img src="https://github.com/user-attachments/assets/ad3b2f13-e4c1-4281-b35f-ad7103d530ee" alt="ascii_image" width="300" style="display: inline-block;"/>
+<br>
+Art by Fishiibo(https://www.instagram.com/fishiibo/)
 
 ## Features
 - Convert images to ASCII art
