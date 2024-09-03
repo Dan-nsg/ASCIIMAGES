@@ -18,13 +18,29 @@ def grayify(image):
     return image.convert("L")
 
 def pixels_to_ascii(image, detail_level=10):
-    """Converte os pixels da imagem em caracteres ASCII."""
+    # Verify that the level of detail is valid
+    if detail_level <= 0 or detail_level > len(ASCII_CHARS):
+        raise ValueError("Level of detail must be between 1 and the length of the ASCII character map.")
+
     pixels = np.array(image)
     ascii_str = ""
-    for pixel_value in pixels:
-        for value in pixel_value:
-            ascii_str += ASCII_CHARS[value // (256 // detail_level)]
+    num_chars = len(ASCII_CHARS)
+    
+    # Sets the maximum value for the character index
+    max_pixel_value = 255
+    range_size = max_pixel_value // detail_level
+    
+    # Ensure range_size is never zero
+    if range_size == 0:
+        range_size = 1
+
+    for pixel_row in pixels:
+        for value in pixel_row:
+            # Adjusts the division for the level of detail
+            char_index = min(value // range_size, num_chars - 1)
+            ascii_str += ASCII_CHARS[char_index]
         ascii_str += "\n"
+    
     return ascii_str
 
 def save_as_image(ascii_art, output_file="ascii_image.png"):
@@ -59,39 +75,39 @@ def main(new_width=100):
     # Configures a window to select the image
     root = tk.Tk()
     root.withdraw()
-    image_path = filedialog.askopenfilename(title="Selecione uma imagem", 
+    image_path = filedialog.askopenfilename(title="Select an image", 
                                             filetypes=[("Image files", "*.jpg *.png *.jpeg *.bmp *.gif")])
 
     if not image_path:
-        print("Nenhuma imagem selecionada.")
+        print("No images selected.")
         return
 
     # Performs the image conversion process to ASCII art.
     try:
         image = Image.open(image_path)
     except Exception as e:
-        print(f"Erro ao abrir a imagem: {e}")
+        print(f"Error opening image: {e}")
         return
     
     image = resize_image(image, new_width)
     image = grayify(image)
     
     # Asks the user for the level of detail
-    detail_level = simpledialog.askinteger("Detalhe", "Escolha o nível de detalhe (1-10):", minvalue=1, maxvalue=10)
+    detail_level = simpledialog.askinteger("Detail", "Choose the level of detail (1-10):", minvalue=1, maxvalue=10)
     ascii_art = pixels_to_ascii(image, detail_level)
 
     # Asks the user for the output format
-    output_format = simpledialog.askstring("Formato", "Escolha o formato de saída (TXT ou PNG):").lower()
+    output_format = simpledialog.askstring("Format", "Choose output format (TXT or PNG):").lower()
 
     if output_format == "txt":
         with open("ascii_image.txt", "w") as f:
             f.write(ascii_art)
-        print("Arte ASCII salva em ascii_image.txt")
+        print("ASCII art saved in ascii_image.txt")
     elif output_format == "png":
         save_as_image(ascii_art, "ascii_image.png")
-        print("Arte ASCII salva em ascii_image.png")
+        print("ASCII art saved in ascii_image.png")
     else:
-        print("Formato desconhecido. Salvando como TXT por padrão.")
+        print("Unknown format. Saving as TXT by default.")
         with open("ascii_image.txt", "w") as f:
             f.write(ascii_art)
 
