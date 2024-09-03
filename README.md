@@ -3,6 +3,10 @@ ASCII Image Converter
 
 This project converts images to ASCII art, allowing the user to save the output as a text file or an image file. The program provides an interactive way to select the image, adjust the level of detail, and choose the output format.
 
+### Reference Image and ASCII PNG Image:
+<img src="https://github.com/user-attachments/assets/a5f1ce91-9b08-4161-9464-8d7b7d75aad8" alt="imagem" width="300" style="display: inline-block;"/>
+<img src="https://github.com/user-attachments/assets/ad3b2f13-e4c1-4281-b35f-ad7103d530ee" alt="ascii_image" width="300" style="display: inline-block;"/>
+
 ## Features
 - Convert images to ASCII art
 - Save ASCII art as a `.txt` or `.png` file
@@ -52,3 +56,5 @@ If you want to contribute to this project, please follow these steps:
 - Pillow (https://pillow.readthedocs.io/en/stable/) - Image processing library
 - NumPy (https://numpy.org/) - Array manipulation library
 - Tkinter (https://docs.python.org/3/library/tkinter.html) - GUI library
+
+
