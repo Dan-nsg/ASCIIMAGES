@@ -1,4 +1,4 @@
-# ASCIIMAGES
+# ASCIIMAGES🧙
 ASCII Image Converter
 
 This project converts images to ASCII art, allowing the user to save the output as a text file or an image file. The program provides an interactive way to select the image, adjust the level of detail, and choose the output format.
